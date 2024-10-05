@@ -56,8 +56,7 @@ function answer(response) {
     `;
     document.getElementById('video-container').innerHTML = `
         <div class="video-container">
-            <p>관련 영상:</p>
-            <iframe width="560" height="315" src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <button onclick="nextQuestion()">다음 질문</button>
     `;
