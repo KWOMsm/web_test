@@ -1,4 +1,5 @@
 let currentQuestion = 0;
+let score = 0;
 const questions = [
     {
         question: '조현병을 가진 사람은 범죄를 일으킬 확률이 높다.',
@@ -28,6 +29,7 @@ const questions = [
 
 function startQuiz() {
     currentQuestion = 0;
+    score = 0;
     showQuestion();
 }
 
@@ -49,8 +51,15 @@ function showQuestion() {
 function answer(response) {
     const feedback = response === 'yes' ? questions[currentQuestion].feedback_yes : questions[currentQuestion].feedback_no;
     const video = questions[currentQuestion].video;
+    const isCorrect = (response === 'yes' && questions[currentQuestion].feedback_yes.startsWith('맞습니다')) ||
+                      (response === 'no' && questions[currentQuestion].feedback_no.startsWith('맞습니다'));
+    
+    if (isCorrect) {
+        score++;
+    }
+    
     document.getElementById('feedback').innerHTML = `
-        <div class="feedback">
+        <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
             <p><strong>피드백:</strong> ${feedback}</p>
         </div>
     `;
@@ -58,7 +67,10 @@ function answer(response) {
         <div class="video-container">
             <iframe src="${video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <button onclick="nextQuestion()">다음 질문</button>
+        ${currentQuestion < questions.length - 1 
+            ? '<button onclick="nextQuestion()">다음 질문</button>'
+            : '<button onclick="showResults()">결과 보기</button>'
+        }
     `;
 }
 
@@ -68,10 +80,28 @@ function nextQuestion() {
 }
 
 function showResults() {
+    const totalQuestions = questions.length;
+    const feedbackMessage = generateFeedbackMessage(score, totalQuestions);
+
     document.getElementById('content').innerHTML = `
         <h2>퀴즈 완료</h2>
-        <p>조현병에 대한 인식 개선에 참여해 주셔서 감사합니다.</p>
+        <p>당신의 점수: ${score} / ${totalQuestions}</p>
+        <p>${feedbackMessage}</p>
         <p>조현병에 대한 올바른 이해는 사회적 편견을 줄이고 환자들의 삶의 질을 향상시키는 데 중요합니다.</p>
         <button onclick="location.reload()">다시 시작</button>
     `;
+}
+
+function generateFeedbackMessage(score, totalQuestions) {
+    if (score === totalQuestions) {
+        return "놀랍습니다! 모든 질문을 정확하게 맞추셨습니다! 조현병에 대한 통찰력이 대단하네요!";
+    } else if (score >= totalQuestions * 0.75) {
+        return "아주 잘하셨습니다! 조현병에 대한 인식이 상당히 좋습니다! 계속해서 주변에 긍정적인 영향을 주세요!";
+    } else if (score >= totalQuestions * 0.5) {
+        return "잘하고 계십니다! 여기서 더 나아갈 수 있습니다. 조현병에 대해 더 배우고 공유해봐요!";
+    } else if (score >= 1) {
+        return "좋은 시작이에요! 모르는 부분을 더 배우고 이해를 넓혀보세요!";
+    } else {
+        return "퀴즈에 참여해주셔서 감사합니다! 다음에는 더 많은 질문을 맞춰보세요!";
+    }
 }
