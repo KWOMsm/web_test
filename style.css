@@ -116,3 +116,105 @@ button:active {
     border-color: #f5c6cb;
     color: #721c24;
 }
+
+.result-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.score {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 20px 0;
+}
+
+.pledge-section {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.pledge-button {
+    background-color: #27ae60;
+    color: white;
+    padding: 15px 30px;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.pledge-button:hover {
+    background-color: #219a52;
+}
+
+#pledge-count {
+    color: #666;
+    font-size: 14px;
+}
+
+#pledge-count span {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.share-section {
+    margin: 30px 0;
+}
+
+.share-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: all 0.3s ease;
+    gap: 8px;
+    min-width: 200px;
+}
+
+.share-button i {
+    font-size: 18px;
+}
+
+.share-button.instagram {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+}
+
+.share-button.x {
+    background-color: #000000;
+}
+
+.share-button.kakao {
+    background-color: #FEE500;
+    color: #000000;
+}
+
+.share-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 600px) {
+    .share-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .share-button {
+        width: 100%;
+    }
+}
