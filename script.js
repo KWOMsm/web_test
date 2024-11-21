@@ -106,7 +106,7 @@ function showResults() {
             
             <div class="pledge-section">
                 <button onclick="makePledge()" class="pledge-button">인식 개선 서약하기</button>
-                <p id="pledge-count">현재까지 <span>1,234</span>명이 서약에 참여했습니다.</p>
+                <p id="pledge-count">현재까지 <span>${1234+signerCount}</span>명이 서약에 참여했습니다.</p>
             </div>
 
             <div class="share-section">
