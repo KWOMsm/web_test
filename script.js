@@ -186,7 +186,7 @@ function makePledge() {
         Swal.fire({
             title: '서명이 완료되었습니다!',
             html: `
-                <p>현재까지 <strong>${signerCount}</strong>명이 서명했습니다.</p>
+                <p>현재까지 <strong>${1234+signerCount}</strong>명이 서명했습니다.</p>
                 <p>조현병 인식 개선을 위한 서약에 동참해주셔서 감사합니다.</p>
                 <div class="pledge-text">
                     1. 나는 조현병에 대한 편견을 버리고 올바른 이해를 하겠습니다.<br>
