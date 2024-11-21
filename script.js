@@ -164,3 +164,46 @@ function generateFeedbackMessage(score, totalQuestions) {
         return "참여해주셔서 감사합니다. 조현병에 대해 함께 더 알아가보아요!";
     }
 }
+
+function makePledge() {
+    // localStorage에서 현재 서명자 수 가져오기
+    let signerCount = localStorage.getItem('signerCount') || 0;
+    signerCount = parseInt(signerCount);
+
+    // 이미 서명했는지 확인
+    if (!localStorage.getItem('hasSigned')) {
+        // 서명자 수 증가
+        signerCount++;
+        
+        // 새로운 서명자 수 저장
+        localStorage.setItem('signerCount', signerCount);
+        localStorage.setItem('hasSigned', 'true');
+
+        // 화면 업데이트
+        document.querySelector('#pledge-count span').textContent = signerCount;
+
+        // 서명 완료 메시지 표시
+        Swal.fire({
+            title: '서명이 완료되었습니다!',
+            html: `
+                <p>현재까지 <strong>${signerCount}</strong>명이 서명했습니다.</p>
+                <p>조현병 인식 개선을 위한 서약에 동참해주셔서 감사합니다.</p>
+                <div class="pledge-text">
+                    1. 나는 조현병에 대한 편견을 버리고 올바른 이해를 하겠습니다.<br>
+                    2. 나는 조현병 환자를 차별하지 않고 존중하겠습니다.<br>
+                    3. 나는 조현병에 대한 올바른 정보를 주변에 전달하겠습니다.
+                </div>
+            `,
+            icon: 'success',
+            confirmButtonText: '확인'
+        });
+    } else {
+        // 이미 서명한 경우
+        Swal.fire({
+            title: '이미 서명하셨습니다',
+            text: '한 사람당 한 번만 서명할 수 있습니다.',
+            icon: 'info',
+            confirmButtonText: '확인'
+        });
+    }
+}
