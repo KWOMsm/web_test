@@ -93,6 +93,10 @@ function nextQuestion() {
 }
 
 function showResults() {
+   // localStorage에서 현재 서명자 수 가져오기
+    let signerCount = localStorage.getItem('signerCount') || 0;
+    signerCount = parseInt(signerCount);
+   
     const totalQuestions = questions.length;
     const feedbackMessage = generateFeedbackMessage(score, totalQuestions);
     const shareText = `조현병 인식 개선 퀴즈에서 ${score}/${totalQuestions}점을 획득했습니다! 함께 인식 개선에 동참해주세요!`;
