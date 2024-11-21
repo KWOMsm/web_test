@@ -167,17 +167,17 @@ function generateFeedbackMessage(score, totalQuestions) {
 
 function makePledge() {
     // localStorage에서 현재 서명자 수 가져오기
-    let signerCount = localStorage.getItem('signerCount') || 0;
+    let signerCount = sessionStorage.getItem('signerCount') || 0;
     signerCount = parseInt(signerCount);
 
     // 이미 서명했는지 확인
-    if (!localStorage.getItem('hasSigned')) {
+    if (!sessionStorage.getItem('hasSigned')) {
         // 서명자 수 증가
         signerCount++;
         
         // 새로운 서명자 수 저장
-        localStorage.setItem('signerCount', signerCount);
-        localStorage.setItem('hasSigned', 'true');
+        sessionStorage.setItem('signerCount', signerCount);
+        sessionStorage.setItem('hasSigned', 'true');
 
         // 화면 업데이트
         document.querySelector('#pledge-count span').textContent = signerCount;
